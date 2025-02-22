@@ -2,7 +2,7 @@
 
 <div align="Center"> 
 <a 
-  href="https://github.com/n3ur0cr45h/Puppet/blob/main/Puppet.jpg"> <img src="https://raw.githubusercontent.com/n3ur0cr45h/Puppet/main/Puppet.jpg" alt="Puppet Image">
+  href="https://github.com/n3ur0cr45h/Ansible/blob/main/Ansible.jpg"> <img src="https://raw.githubusercontent.com/n3ur0cr45h/Ansible/main/Ansible.jpg" alt="Puppet Image">
 </a>
 </div>
 
