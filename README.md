@@ -28,7 +28,7 @@
   
 |  ID  | Título                    | Descrição                                                                        | 
 | ---- | ------------------------- | ---------------------------------------------------------------------------------| 
-|  01  |    |           |
+|  01  | Automação WebServer   | Realizar a Instalação e Configuração do Apache2 com um playbook          |
 |  02  |    |           |
 |  03  |    |           |
 |  04  |    |           |
