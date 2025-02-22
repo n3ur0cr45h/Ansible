@@ -33,11 +33,11 @@
 7. vi /etc/ansible/hosts # Arquivo de Inventário dos Hosts que receberão os comandos 
 
      [webserver]
-	 192.168.1.1
+     192.168.1.1
 	 
-	 [webserver:vars]
-	 ansible_ssh_user=usuario
-	 ansible_ssh_private_key_file='/Ansible/ls' # Não é a chave pública, precisa ser a privada
+     [webserver:vars]
+     ansible_ssh_user=usuario
+     ansible_ssh_private_key_file='/Ansible/ls' # Não é a chave pública, precisa ser a privada
 	 
 8. chmod 600 /Ansible/ls
 
