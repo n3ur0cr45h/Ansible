@@ -10,7 +10,7 @@
 <div align="Right">
 <h6>
 <strong>Participação de Mercado</strong>
-<br><strong>Empresas</strong>: 15%
+<br><strong>Empresas</strong>: 30% - 40%
 </h6>  
 </div>
 
