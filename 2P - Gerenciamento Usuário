@@ -1,1 +1,55 @@
 
+
+##### Servidor Ansible 
+
+1. vi projeto_2.yml 
+
+     - name: Gerenciamento de Usuários e Permissões em Ubuntu
+      hosts: web_servers  
+      become: true  
+      
+      tasks:
+        - name: Criar um usuário
+          user:
+            name: "usuario_teste_1"
+            state: present
+            password: "{{ 'senha_forte' }}"
+            shell: /bin/bash
+            create_home: yes
+     
+        - name: Criar um segundo usuário com um grupo
+          user:
+            name: "usuario_teste_2"
+            state: present
+            password: "{{ 'senha_forte' }}"
+            groups: "admin"
+            shell: /bin/bash
+            create_home: yes
+     
+        - name: Adicionar usuário ao grupo
+          user:
+            name: "usuario_teste_1"
+            groups: "sudo"
+            append: yes  
+     
+        - name: Permissões corretas para acesso ao Home 
+          file:
+            path: "/home/usuario_teste_1"
+            owner: "usuario_teste_1"
+            group: "usuario_teste_1"
+            mode: "0755"
+     
+        - name: Criar um diretório e garantir permissões específicas
+          file:
+            path: "/opt/secure_folder"
+            state: directory
+            owner: "usuario_teste_1"
+            group: "usuario_teste_1"
+            mode: "0700"
+
+2. ansible-playbook projeto_2.yml -K 
+
+
+##### Servidor Web
+
+3. cat passwd 
