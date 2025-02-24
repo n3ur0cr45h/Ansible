@@ -29,7 +29,7 @@
 |  ID  | Título                    | Descrição                                                                        | 
 | ---- | ------------------------- | ---------------------------------------------------------------------------------| 
 |  01  | Automação WebServer   | Realizar a Instalação e Configuração do Apache2 com um playbook          |
-|  02  |    |           |
+|  02  | Gerenciamento Usuário   | Criar Usuários e Inserir em Grupos de Forma Automática com o playbook           |
 |  03  |    |           |
 |  04  |    |           |
 |  05  |    |           |
