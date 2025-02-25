@@ -1,0 +1,24 @@
+
+##### Servidor - Ansible 
+
+1. vi projeto_3.yml 
+
+  - name: Provisionar um container Hello World
+    hosts: web_servers
+    become: yes 
+  
+    tasks:  
+      - name: Iniciar o serviço Docker
+        service:
+          name: docker
+          state: started
+          enabled: yes
+  
+      - name: Rodar o container Hello World
+        docker_container:
+          name: hello_world_container
+          image: hello-world
+          state: started
+          restart_policy: no
+
+2. ansible-playbook projeto_3.yml -K # Para pedir a senha do usuário remoto, ao executar o Playbook 
