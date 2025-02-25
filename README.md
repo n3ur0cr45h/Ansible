@@ -30,7 +30,7 @@
 | ---- | ------------------------- | ---------------------------------------------------------------------------------| 
 |  01  | Automação WebServer   | Realizar a Instalação e Configuração do Apache2 com um playbook          |
 |  02  | Gerenciamento Usuário   | Criar Usuários e Inserir em Grupos de Forma Automática com o playbook           |
-|  03  |    |           |
+|  03  | Automação Container   | Provisionar Automaticamente um Container no Host Destino          |
 |  04  |    |           |
 |  05  |    |           |
 |  06  |    |           |
