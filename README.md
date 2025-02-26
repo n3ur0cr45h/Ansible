@@ -33,7 +33,7 @@
 |  03  | Automação Container   | Provisionar Automaticamente um Container no Host Destino          |
 |  04  | Backup com Ansible   | Criar playbooks de Backup e Recuperação - usando um servidor remoto          |
 |  05  | Gestão de Patches   | Automatizar a atualização dos sistemas remotos          |
-|  06  |    |           |
+|  06  | Provisionamento MySQL   | Instalar remotamente o MySQL com ansible          |
 |  07  |    |           |
 |  08  |    |           |
 |  09  |    |           |
