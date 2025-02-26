@@ -32,7 +32,7 @@
 |  02  | Gerenciamento Usuário   | Criar Usuários e Inserir em Grupos de Forma Automática com o playbook           |
 |  03  | Automação Container   | Provisionar Automaticamente um Container no Host Destino          |
 |  04  | Backup com Ansible   | Criar playbooks de Backup e Recuperação - usando um servidor remoto          |
-|  05  |    |           |
+|  05  | Gestão de Patches   | Automatizar a atualização dos sistemas remotos          |
 |  06  |    |           |
 |  07  |    |           |
 |  08  |    |           |
