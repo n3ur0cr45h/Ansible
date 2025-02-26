@@ -34,7 +34,7 @@
 |  04  | Backup com Ansible   | Criar playbooks de Backup e Recuperação - usando um servidor remoto          |
 |  05  | Gestão de Patches   | Automatizar a atualização dos sistemas remotos          |
 |  06  | Provisionamento MySQL   | Instalar remotamente o MySQL com ansible          |
-|  07  |    |           |
+|  07  | Monitoramento Ansible    | Verificar Disco, Memória e uso do CPU com o Ansible         |
 |  08  |    |           |
 |  09  |    |           |
 |  10  |    |           |
