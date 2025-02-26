@@ -1,1 +1,55 @@
 
+##### Servidor Ansible 
+
+1. Arquivo /etc/ansible/host
+   [server]
+   192.168.15.164
+
+   [server:vars]
+   ansible_ssh_user='admin'
+   ansible_ssh_private_key_file='/Ansible/ls'
+
+   [local]
+  192.168.15.112 ansible_connection=local
+
+2. Arquivo Playbook - projeto_4_backup.yml 
+
+- name: Automatizar Backup para Servidor Remoto
+  hosts: local
+  become: yes
+  tasks:
+    - name: Verificar o Diretório no Servidor Remoto
+      ansible.builtin.file:
+        path: "/Recovery"
+        state: directory
+      delegate_to: 192.168.15.164
+
+    - name: Backup para o servidor remoto
+      ansible.builtin.command:
+        cmd: >
+          rsync -avz --no-times /Backup/ admin@192.168.15.164:/Recovery/
+      become: yes
+
+3. Arquivo Playbook - projeto_4_recovery.yml 
+
+- name: Recuperação de Backup do Servidor Remoto
+  hosts: local
+  become: yes
+  tasks:
+    - name: Restaurar arquivos do backup no servidor remoto
+      ansible.builtin.command:
+        cmd: >
+          rsync -avz admin@192.168.15.164:/Recovery/ /Backup/
+      become: yes
+
+4. Criar os arquivos de teste no diretório /Backup e rodar o comando: ansible-playbook projeto_4_backup.yml -K 
+
+##### Servidor Remoto 
+
+5. Verificar o diretório /Recovery, se os arquivos estão lá 
+
+##### Possíveis Problemas: 
+
+"Missing Sudo Password" ao rodar o Playbook Backup: Colocar a flag -K para pedir a senha durante o processo 
+"Permission Denied" ao rodar o Playbook Backup: O usuário remoto que usar (nesse caso, Admin), precisa ter a permissão de escrita na pasta /Recovery
+
