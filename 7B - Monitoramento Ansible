@@ -1,0 +1,42 @@
+
+1. vi projeto_7.yml
+
+- name: Monitoramento da Infraestrutura 
+  hosts: server
+  become: yes
+  tasks:
+
+    - name: 1.1. Verificar uso de disco
+      command: df -h --total
+      register: disk_usage
+      changed_when: false
+
+    - name: 1.2. Exibir uso de disco
+      debug:
+        msg: |
+          === Uso de Disco em {{ inventory_hostname }} ===
+          Total: {{ disk_usage.stdout_lines[-1].split()[1] }} | Usado: {{ disk_usage.stdout_lines[-1].split()[2] }} | Livre: {{ disk_usage.stdout_lines[-1].split()[3] }} | Uso: {{ disk_usage.stdout_lines[-1].split()[4] }}
+    
+    - name: 2.1. Verificar uso de memória
+      command: free -m
+      register: memory_usage
+      changed_when: false
+
+    - name: 2.2. Exibir uso de memória
+      debug:
+        msg: |
+          === Uso de Memória em {{ inventory_hostname }} ===
+          Total: {{ memory_usage.stdout_lines[1].split()[1] }} MB | Usado: {{ memory_usage.stdout_lines[1].split()[2] }} MB | Livre: {{ memory_usage.stdout_lines[1].split()[3] }} MB
+
+    - name: 3.1. Verificar uso da CPU
+      command: mpstat 1 1
+      register: cpu_usage
+      changed_when: false
+
+    - name: 3.2. Exibir uso de CPU
+      debug:
+        msg: |
+          === Uso de CPU em {{ inventory_hostname }} ===
+          Uso: {{ cpu_usage.stdout_lines[-1].split()[2] }}% | Ociosidade: {{ cpu_usage.stdout_lines[-1].split()[11] }}% 
+
+2. ansible-playbook projeto_7.yml -K
