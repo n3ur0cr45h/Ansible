@@ -1,0 +1,23 @@
+
+1. vi projeto_6.yml 
+
+- name: Provisionamento do MySQL
+  hosts: server # Aqui estou usando ainda o mesmo host dos outros projetos
+  become: yes
+
+  tasks:
+    - name: Instalar pacotes do MySQL
+      apt:
+        name: mysql-server
+        state: present
+      when: ansible_os_family == "Debian"
+      register: mysql_install
+
+      
+    - name: Iniciar o serviço MySQL
+      service:
+        name: mysql
+        state: started
+        enabled: yes
+      when: mysql_install.changed
+      register: mysql_service
