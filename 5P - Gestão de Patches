@@ -1,0 +1,28 @@
+
+##### Servidor do Ansible 
+
+1. vi projeto_5.yml 
+
+- name: Gerenciar Patches e Atualizações
+  hosts: server
+  become: yes  
+  tasks:
+    - name: Atualizar a lista de pacotes
+      apt:
+        update_cache: yes
+      when: ansible_os_family == "Debian"
+
+    - name: Atualizar pacotes no Ubuntu/Debian
+      apt:
+        upgrade: dist
+        force_apt_get: yes
+      when: ansible_os_family == "Debian"
+
+    - name: Limpar cache de pacotes
+      apt:
+        autoclean: yes
+      when: ansible_os_family == "Debian"
+
+  2. ansible-playbook projeto_5.yml -K 
+
+  Obs.: Também seria possível agendar o playbook com o Cron 
