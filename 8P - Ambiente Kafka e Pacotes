@@ -1,0 +1,37 @@
+
+1. vi projeto_8.yml 
+- name: Deploy de Kafka
+  hosts: server
+  become: true
+
+  tasks:
+    - name: 1. Instalar Dependências para o Ambiente e Kafka
+      apt:
+        name:
+          - openjdk-11-jdk
+          - python3
+          - python3-pip
+          - python3-dev
+        state: present
+
+
+    - name: 2.1. Baixar e extrair o Apache Kafka
+      get_url:
+        url: "https://dlcdn.apache.org/kafka/3.9.0/kafka-3.9.0-src.tgz"
+        dest: /Kafka/kafka-3.9.0-src.tgz
+
+    - name: 2.2. Extrair o arquivo do Apache Kafka
+      unarchive:
+        src: /Kafka/kafka-3.9.0-src.tgz
+        dest: /Kafka/
+        remote_src: yes
+
+    - name: 2.3. Configurar variáveis de ambiente do Kafka
+      copy:
+        dest: /etc/profile.d/kafka.sh
+        content: |
+          export KAFKA_HOME=/Kafka/kafka-3.9.0-src.tgz
+          export PATH=$KAFKA_HOME/bin:$PATH
+        mode: '0755'
+
+2. ansible-playbook projeto_8.yml -Kv #Para ver se pode dar algum erro, ter Verbose
