@@ -43,7 +43,7 @@
 |  07  | Monitoramento Ansible     | Verificar Disco, Memória e uso do CPU com o Ansible                              |
 |  08  | Ambiente Kafka            | Provisionar um Ambiente com o Kafka e Pacotes para Aplicações                    |
 |  09  | Auditoria de Sistemas     | Automatizar o ElasticSearch, LogStash e FileBeat (ELK - Stack)                   |
-|  10  |    |           |
+|  10  | Compliance na Infra       | Realizar processos de Segurança e Compliance na Infraestrutura                   |
 
 
 </div> 
