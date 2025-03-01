@@ -1,0 +1,47 @@
+
+##### Servidor Ansible 
+
+1. vi projeto_10.yml
+
+
+- name: Segurança e Compliance em Infra
+  hosts: server
+  become: yes
+  tasks:
+
+    # 1. Aplicar Políticas de Senha Segura
+    - name: 1. Configuracao para senhas seguras
+      lineinfile:
+        path: /etc/pam.d/common-password
+        regexp: '^password'
+        line: 'password requisite pam_pwquality.so retry=3 minlen=12 maxrepeat=3'
+
+    # 2. Instalar e Configurar Auditd (Auditoria)
+    - name: 2. Instalar o pacote auditd
+      apt:
+        name: auditd
+        state: present
+
+    - name: 2.1. Audit em Execucao 
+      service:
+        name: auditd
+        state: started
+        enabled: yes
+
+    - name: 2.2. Configurar regras de auditoria para monitorar mudanças no /etc/passwd
+      lineinfile:
+        path: /etc/audit/rules.d/audit.rules
+        regexp: '^auditctl'
+        line: '-w /etc/passwd -p wa'
+    
+    # 3. Aplicar Atualizações de Segurança
+    - name: 3. Atualizar o repositório de pacotes
+      apt:
+        update_cache: yes
+
+    - name: 3.1. Instalar atualizações de segurança
+      apt:
+        upgrade: dist
+        only_upgrade: yes
+
+2. ansible-playbook projeto_10.yml -Kv
