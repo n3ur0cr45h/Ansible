@@ -1,0 +1,102 @@
+
+##### Servidor Remoto 
+
+1. wget -qO - https://artifacts.elastic.co/GPG-KEY-elasticsearch | sudo gpg --dearmor -o /usr/share/keyrings/elasticsearch-keyring.gpg
+
+2. sudo apt-get install apt-transport-https
+
+3. echo "deb [signed-by=/usr/share/keyrings/elasticsearch-keyring.gpg] https://artifacts.elastic.co/packages/8.x/apt stable main" | sudo tee /etc/apt/sources.list.d/elastic-8.x.list
+
+##### Servidor Ansible 
+
+4. vi projeto_9.yml
+
+
+- name: Configuração do ELK Stack
+  hosts: server
+  become: yes
+  tasks:
+
+
+
+    # Instalação do Elasticsearch
+    - name: 1. Instalar Elasticsearch
+      apt:
+        name: elasticsearch
+        state: present
+        update_cache: yes
+
+    - name: 1.1. Iniciar Elasticsearch
+      service:
+        name: elasticsearch
+        state: started
+        enabled: yes
+
+
+
+    # Instalação do Logstash
+    - name: 2. Instalar Logstash
+      apt:
+        name: logstash
+        state: present
+        update_cache: yes
+
+    - name: 2.1. Configurar Logstash para coletar logs
+      copy:
+        dest: "/etc/logstash/conf.d/logstash.conf"
+        content: |
+          input {
+            beats {
+              port => 5044
+            }
+          }
+
+          output {
+            elasticsearch {
+              hosts => ["http://elasticsearch1:9200"]
+              index => "logs-%{+YYYY.MM.dd}"
+            }
+          }
+
+    - name: 2.2. Iniciar Logstash
+      service:
+        name: logstash
+        state: started
+        enabled: yes
+
+
+
+# Instalação do Filebeat - Para o Logstash , que envia ao Elasticsearch        
+- name: 3. Configuração do Filebeat nos servidores
+  hosts: server
+  become: yes
+  tasks:
+    # Instalação do Filebeat
+    - name: 3.1. Instalar Filebeat
+      apt:
+        name: filebeat
+        state: present
+        update_cache: yes
+
+    - name: 3.2. Configurar Filebeat para enviar logs ao Logstash
+      copy:
+        dest: "/etc/filebeat/filebeat.yml"
+        content: |
+          filebeat.inputs:
+            - type: log
+              enabled: true
+              paths:
+                - /var/log/*.log
+
+          output.logstash:
+            hosts: ["logstash1:5044"]
+
+    - name: 3.3. Iniciar Filebeat
+      service:
+        name: filebeat
+        state: started
+        enabled: yes
+
+5. ansible-playbook projeto_9.yml -Kv 
+
+Obs.: Instalar o Stack vai consumir bastante CPU e memória. Precisa ter, pelo menos, uns 2 / 3 GBs de RAM e 3 / 4 CPUs 
