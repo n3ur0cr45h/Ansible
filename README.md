@@ -41,7 +41,7 @@
 |  05  | Gestão de Patches         | Automatizar a atualização dos sistemas remotos                                   |
 |  06  | Provisionamento MySQL     | Instalar remotamente o MySQL com ansible                                         |
 |  07  | Monitoramento Ansible     | Verificar Disco, Memória e uso do CPU com o Ansible                              |
-|  08  | Ambiente Kafka e Pacotes  | Provisionar um Ambiente com o Kafka e Pacotes para Aplicações                    |
+|  08  | Ambiente Kafka            | Provisionar um Ambiente com o Kafka e Pacotes para Aplicações                    |
 |  09  | Auditoria de Sistemas     | Automatizar o ElasticSearch, LogStash e FileBeat (ELK - Stack)                   |
 |  10  |    |           |
 
