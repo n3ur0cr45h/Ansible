@@ -8,8 +8,7 @@
 
 <div align="Right">
 <h6>
-<strong>Documentação</strong>
-<br><strong>https://docs.ansible.com/</strong>
+<br><strong><a href="https://docs.ansible.com/">Documentação</a></strong>
 </h6>  
 </div>
 
